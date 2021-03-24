@@ -1,28 +1,29 @@
 from numpy import *
 
 # Length of links in cm
-a1= 5.2
-a2 = 6.9
-a3 = 6.8
+Length_a= 5.2
+Length_b = 6.9
+Length_c = 6.8
 
 # Desired Position of End effector
-px = -14
+px = 10
 py = 3
 
 phi = 90
 phi = deg2rad(phi)
 
 # Equations for Inverse kinematics
-wx = px - a3*cos(phi)
-wy = py - a3*sin(phi)
-
+wx = px - Length_c*cos(phi)
+wy = py - Length_c*sin(phi)
+print(wx)
+print(wy)
 delta = wx**2 + wy**2
-c2 = ( delta -a1**2 -a2**2)/(2*a1*a2)
+c2 = ( delta -Length_a**2 -Length_b**2)/(2*Length_a*Length_b)
 s2 = sqrt(1-c2**2)  # elbow down
 theta_2 = arctan2(s2, c2)
 
-s1 = ((a1+a2*c2)*wy - a2*s2*wx)/delta
-c1 = ((a1+a2*c2)*wx + a2*s2*wy)/delta
+s1 = ((Length_a+Length_b*c2)*wy - Length_b*s2*wx)/delta
+c1 = ((Length_a+Length_b*c2)*wx + Length_b*s2*wy)/delta
 theta_1 = arctan2(s1,c1)
 theta_3 = phi-theta_1-theta_2
 
